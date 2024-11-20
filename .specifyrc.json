@@ -1,17 +1,47 @@
 {
-  "repository": "@even/tdesign",
+  "version": "2",
   "head": "specifyrc-json",
   "base": "main",
-  "version": "2",
+  "repository": "@even/tdesign",
   "rules": [
     {
-      "name": "SDTF",
+      "name": "Generate tokens as a Tailwind theme",
       "parsers": [
         {
-          "name": "to-sdtf",
+          "name": "to-tailwind",
           "output": {
             "type": "file",
-            "filePath": "output/tokens.json"
+            "filePath": "theme.js"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Optimize and transform vectors with svgo + Generate JSX components",
+      "parsers": [
+        {
+          "name": "svgo",
+          "options": {
+            "svgo": {
+              "plugins": [
+                {
+                  "name": "removeDimensions"
+                },
+                {
+                  "name": "convertColors",
+                  "params": {
+                    "currentColor": true
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "svg-to-jsx",
+          "output": {
+            "type": "directory",
+            "directoryPath": "output/assets"
           }
         }
       ]
